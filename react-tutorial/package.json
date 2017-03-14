@@ -9,10 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.15.3",
+    "firebase": "^3.7.1",
     "history": "^1.13.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^1.0.1",
+    "reactfire": "^1.0.0",
     "webpack": "^2.2.1"
   },
   "devDependencies": {
