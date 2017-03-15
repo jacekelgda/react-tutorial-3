@@ -26,22 +26,29 @@ var Profile = React.createClass({
       messagingSenderId: "329879300450"
     };
     this.ref = firebase.initializeApp(config);
+    this.init(this.props.params.username);
+  },
+  componentWillReceiveProps: function(nextProps) {
+    this.unbind('notes');
+    this.init(nextProps.params.username);
+  },
+  componentWillUnmount: function() {
+    this.unbind('notes');
+  },
+  handleAddNote: function(newNote) {
+    firebase.database().ref('notes').child(this.props.params.username).child(this.state.notes.length).set(newNote);
+  },
+  init: function(username) {
     var ref = firebase.database().ref('notes');
-    this.bindAsArray(ref.child(this.props.params.username), 'notes');
+    this.bindAsArray(ref.child(username), 'notes');
 
-    helpers.getGithubInfo(this.props.params.username)
+    helpers.getGithubInfo(username)
       .then(function(data) {
         this.setState({
           bio: data.bio,
           repos: data.repos
         });
       }.bind(this));
-  },
-  componentWillUnmount: function() {
-    thid.unbind('notes');
-  },
-  handleAddNote: function(newNote) {
-    firebase.database().ref('notes').child(this.props.params.username).child(this.state.notes.length).set(newNote);
   },
   render: function() {
     return (
