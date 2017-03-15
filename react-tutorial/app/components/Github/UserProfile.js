@@ -2,11 +2,11 @@ var React = require('react');
 
 var UserProfile = React.createClass({
   render: function(){
-    console.log('bio', this.props.bio);
     return (
       <div>
-        <p>User profile:</p>
-        <p>Username: {this.props.username}</p>
+        <h3>User profile:</h3>
+        {this.props.bio.avatar_url && <li className="list-group-item"><img src={this.props.bio.avatar_url} className="img-thumbnail"></img></li>}
+        {this.props.bio.name && <li className="list-group-item"><p>{this.props.bio.name}</p></li>}
       </div>
     )
   }
